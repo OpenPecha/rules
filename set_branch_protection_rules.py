@@ -54,11 +54,12 @@ def set_branch_protection(owner, repo, branch, token):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Set branch protection rule on a GitHub repository.")
-    parser.add_argument("owner", help="GitHub username or organization")
-    parser.add_argument("repo", help="Repository name")
+    parser.add_argument("repo", help="Repository name in the format 'owner/repo'")
     parser.add_argument("branch", help="Branch to protect")
     parser.add_argument("token", help="GitHub personal access token")
 
     args = parser.parse_args()
 
-    set_branch_protection(args.owner, args.repo, args.branch, args.token)
+    owner, repo = args.repo.strip().split("/")
+
+    set_branch_protection(owner, repo, args.branch, args.token)
